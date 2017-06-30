@@ -1,0 +1,14 @@
+module Cli where
+
+import Lib
+import qualified Data.Text as T
+import qualified Data.List as L
+
+getDocuments :: FilePath -> IO [Document]
+getDocuments path = fmap T.pack <$> lines <$> readFile path
+
+rankByRelevanceTo :: Count -> [Document] -> Maybe [(Count, Document)]
+rankByRelevanceTo i docs = do
+  (queryDoc, corpus) <- pluck i docs
+  
+  
